@@ -14,7 +14,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import domain.Entity;
 import domain.FState;
 import domain.ObjectRecord;
-import domain.PCState;
+import domain.EnsuresState;
 import domain.Record;
 import domain.RecordFieldValue;
 import domain.SchemaMapping;
@@ -56,8 +56,8 @@ public class VisitorOrientedParser {
             FStateVisitor fStateVisitor = new FStateVisitor();
             FState fState = ctx.fState() != null ? ctx.accept(fStateVisitor) : null;
 
-            PCStateVisitor pcStateVisitor = new PCStateVisitor();
-            PCState pcState = ctx.postcondState() != null ? ctx.accept(pcStateVisitor) : null;
+            EnsuresStateVisitor ensuresStateVisitor = new EnsuresStateVisitor();
+            EnsuresState ensuresState = ctx.ensuresState() != null ? ctx.accept(ensuresStateVisitor) : null;
 
             List<TLASimplifiedStateParser.EntityContext> entitiesCtx = ctx.entity() != null ? ctx.entity() : null;
             Map<String, Entity> entities = null;
@@ -75,7 +75,7 @@ public class VisitorOrientedParser {
             SchemaMappingVisitor schemaMappingVisitor = new SchemaMappingVisitor();
             SchemaMapping schemaMapping = ctx.schemaMapping() != null? ctx.accept(schemaMappingVisitor) : null;
 
-            return new StateElement(fState, pcState, entities, schemaMapping);
+            return new StateElement(fState, ensuresState, entities, schemaMapping);
         }
     }
 
@@ -118,11 +118,11 @@ public class VisitorOrientedParser {
         }
     }
 
-    public static class PCStateVisitor extends TLASimplifiedStateBaseVisitor<PCState> {
+    public static class EnsuresStateVisitor extends TLASimplifiedStateBaseVisitor<EnsuresState> {
         @Override
-        public PCState visitPostcondState(TLASimplifiedStateParser.PostcondStateContext ctx) {
-            boolean pc = Boolean.parseBoolean(ctx.BOOLEAN().getText());
-            return new PCState(pc);
+        public EnsuresState visitEnsuresState(TLASimplifiedStateParser.EnsuresStateContext ctx) {
+            boolean ensures = Boolean.parseBoolean(ctx.BOOLEAN().getText());
+            return new EnsuresState(ensures);
         }
     }
 

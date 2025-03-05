@@ -5,13 +5,14 @@ import java.util.Map;
 public class StateElement {
 
     private final FState f;
-    private final PCState pc;
+    private final EnsuresState ensures;
     private final Map<String, Entity> entities;
     private final SchemaMapping schemaMapping;
 
-    public StateElement(FState fState, PCState pcState, Map<String, Entity> entities, SchemaMapping schemaMapping) {
+    public StateElement(FState fState, EnsuresState ensuresState, Map<String, Entity> entities,
+        SchemaMapping schemaMapping) {
         f = fState;
-        pc = pcState;
+        ensures = ensuresState;
         this.entities = entities;
         this.schemaMapping = schemaMapping;
     }
@@ -39,8 +40,8 @@ public class StateElement {
         return f;
     }
 
-    public PCState getPc() {
-        return pc;
+    public EnsuresState getEnsures() {
+        return ensures;
     }
 
     public Map<String, Entity> getEntities() {
@@ -58,8 +59,8 @@ public class StateElement {
 
         if (f != null)
             s.append(f);
-        else if (pc != null)
-            s.append(pc);
+        else if (ensures != null)
+            s.append(ensures);
         else if (entities != null)
             if (entities.isEmpty())
                 s.append("entities = {}");

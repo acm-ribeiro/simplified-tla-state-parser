@@ -27,6 +27,26 @@ public interface TLASimplifiedStateListener extends ParseTreeListener {
 	 */
 	void exitStateElement(TLASimplifiedStateParser.StateElementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link TLASimplifiedStateParser#fState}.
+	 * @param ctx the parse tree
+	 */
+	void enterFState(TLASimplifiedStateParser.FStateContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TLASimplifiedStateParser#fState}.
+	 * @param ctx the parse tree
+	 */
+	void exitFState(TLASimplifiedStateParser.FStateContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link TLASimplifiedStateParser#ensuresState}.
+	 * @param ctx the parse tree
+	 */
+	void enterEnsuresState(TLASimplifiedStateParser.EnsuresStateContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TLASimplifiedStateParser#ensuresState}.
+	 * @param ctx the parse tree
+	 */
+	void exitEnsuresState(TLASimplifiedStateParser.EnsuresStateContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link TLASimplifiedStateParser#schemaMapping}.
 	 * @param ctx the parse tree
 	 */
@@ -116,26 +136,6 @@ public interface TLASimplifiedStateListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSetElement(TLASimplifiedStateParser.SetElementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link TLASimplifiedStateParser#fState}.
-	 * @param ctx the parse tree
-	 */
-	void enterFState(TLASimplifiedStateParser.FStateContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link TLASimplifiedStateParser#fState}.
-	 * @param ctx the parse tree
-	 */
-	void exitFState(TLASimplifiedStateParser.FStateContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link TLASimplifiedStateParser#postcondState}.
-	 * @param ctx the parse tree
-	 */
-	void enterPostcondState(TLASimplifiedStateParser.PostcondStateContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link TLASimplifiedStateParser#postcondState}.
-	 * @param ctx the parse tree
-	 */
-	void exitPostcondState(TLASimplifiedStateParser.PostcondStateContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link TLASimplifiedStateParser#objectRecord}.
 	 * @param ctx the parse tree

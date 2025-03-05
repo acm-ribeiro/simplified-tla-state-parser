@@ -22,6 +22,18 @@ public interface TLASimplifiedStateVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStateElement(TLASimplifiedStateParser.StateElementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link TLASimplifiedStateParser#fState}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFState(TLASimplifiedStateParser.FStateContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link TLASimplifiedStateParser#ensuresState}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEnsuresState(TLASimplifiedStateParser.EnsuresStateContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link TLASimplifiedStateParser#schemaMapping}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -75,18 +87,6 @@ public interface TLASimplifiedStateVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSetElement(TLASimplifiedStateParser.SetElementContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link TLASimplifiedStateParser#fState}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFState(TLASimplifiedStateParser.FStateContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link TLASimplifiedStateParser#postcondState}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPostcondState(TLASimplifiedStateParser.PostcondStateContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link TLASimplifiedStateParser#objectRecord}.
 	 * @param ctx the parse tree

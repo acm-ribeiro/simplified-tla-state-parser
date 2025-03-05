@@ -40,6 +40,30 @@ public class TLASimplifiedStateBaseListener implements TLASimplifiedStateListene
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFState(TLASimplifiedStateParser.FStateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFState(TLASimplifiedStateParser.FStateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEnsuresState(TLASimplifiedStateParser.EnsuresStateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEnsuresState(TLASimplifiedStateParser.EnsuresStateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSchemaMapping(TLASimplifiedStateParser.SchemaMappingContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -143,30 +167,6 @@ public class TLASimplifiedStateBaseListener implements TLASimplifiedStateListene
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSetElement(TLASimplifiedStateParser.SetElementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterFState(TLASimplifiedStateParser.FStateContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFState(TLASimplifiedStateParser.FStateContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPostcondState(TLASimplifiedStateParser.PostcondStateContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPostcondState(TLASimplifiedStateParser.PostcondStateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

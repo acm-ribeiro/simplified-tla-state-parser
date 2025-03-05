@@ -10,8 +10,7 @@ import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
  * operations with no return type.
  */
 @SuppressWarnings("CheckReturnValue")
-public class TLASimplifiedStateBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
-    TLASimplifiedStateVisitor<T> {
+public class TLASimplifiedStateBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements TLASimplifiedStateVisitor<T> {
 	/**
 	 * {@inheritDoc}
 	 *
@@ -26,6 +25,20 @@ public class TLASimplifiedStateBaseVisitor<T> extends AbstractParseTreeVisitor<T
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitStateElement(TLASimplifiedStateParser.StateElementContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFState(TLASimplifiedStateParser.FStateContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitEnsuresState(TLASimplifiedStateParser.EnsuresStateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -89,20 +102,6 @@ public class TLASimplifiedStateBaseVisitor<T> extends AbstractParseTreeVisitor<T
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitSetElement(TLASimplifiedStateParser.SetElementContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitFState(TLASimplifiedStateParser.FStateContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitPostcondState(TLASimplifiedStateParser.PostcondStateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
