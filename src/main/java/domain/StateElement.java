@@ -51,9 +51,7 @@ public class StateElement {
     public String toString() {
         StringBuilder s = new StringBuilder();
 
-        if (f != null)
-            s.append(f);
-        else if (ensures != null)
+        if (ensures != null)
             s.append(ensures);
         else if (entities != null)
             if (entities.isEmpty())
