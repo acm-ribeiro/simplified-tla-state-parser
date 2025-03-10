@@ -27,6 +27,16 @@ public interface TLASimplifiedListener extends ParseTreeListener {
 	 */
 	void exitStateElement(TLASimplifiedParser.StateElementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link TLASimplifiedParser#fState}.
+	 * @param ctx the parse tree
+	 */
+	void enterFState(TLASimplifiedParser.FStateContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TLASimplifiedParser#fState}.
+	 * @param ctx the parse tree
+	 */
+	void exitFState(TLASimplifiedParser.FStateContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link TLASimplifiedParser#ensuresState}.
 	 * @param ctx the parse tree
 	 */

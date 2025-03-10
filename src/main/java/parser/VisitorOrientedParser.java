@@ -12,6 +12,7 @@ import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import domain.Entity;
+import domain.FState;
 import domain.ObjectRecord;
 import domain.EnsuresState;
 import domain.Record;
@@ -52,6 +53,9 @@ public class VisitorOrientedParser {
     public static class StateElementVisitor extends TLASimplifiedBaseVisitor<StateElement> {
         @Override
         public StateElement visitStateElement(TLASimplifiedParser.StateElementContext ctx) {
+            FStateVisitor fStateVisitor = new FStateVisitor();
+            FState fState = ctx.fState() != null ? ctx.accept(fStateVisitor) : null;
+
             EnsuresStateVisitor ensuresStateVisitor = new EnsuresStateVisitor();
             EnsuresState ensuresState = ctx.ensuresState() != null ? ctx.accept(ensuresStateVisitor) : null;
 
@@ -71,7 +75,15 @@ public class VisitorOrientedParser {
             SchemaMappingVisitor schemaMappingVisitor = new SchemaMappingVisitor();
             SchemaMapping schemaMapping = ctx.schemaMapping() != null? ctx.accept(schemaMappingVisitor) : null;
 
-            return new StateElement(ensuresState, entities, schemaMapping);
+            return new StateElement(fState, ensuresState, entities, schemaMapping);
+        }
+    }
+
+    public static class FStateVisitor extends TLASimplifiedBaseVisitor<FState> {
+        @Override
+        public FState visitFState(TLASimplifiedParser.FStateContext ctx) {
+            boolean f = Boolean.parseBoolean(ctx.BOOLEAN().getText());
+            return new FState(f);
         }
     }
 

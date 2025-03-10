@@ -4,15 +4,26 @@ import java.util.Map;
 
 public class StateElement {
 
+    private final FState f;
     private final EnsuresState ensures;
     private final Map<String, Entity> entities;
     private final SchemaMapping schemaMapping;
 
-    public StateElement(EnsuresState ensuresState, Map<String, Entity> entities,
+    public StateElement(FState fState, EnsuresState ensuresState, Map<String, Entity> entities,
         SchemaMapping schemaMapping) {
+        f = fState;
         ensures = ensuresState;
         this.entities = entities;
         this.schemaMapping = schemaMapping;
+    }
+
+    /**
+     * Returns the final state.
+     *
+     * @return final state
+     */
+    public FState getF() {
+        return f;
     }
 
     /**

@@ -40,6 +40,18 @@ public class TLASimplifiedBaseListener implements TLASimplifiedListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFState(TLASimplifiedParser.FStateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFState(TLASimplifiedParser.FStateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterEnsuresState(TLASimplifiedParser.EnsuresStateContext ctx) { }
 	/**
 	 * {@inheritDoc}

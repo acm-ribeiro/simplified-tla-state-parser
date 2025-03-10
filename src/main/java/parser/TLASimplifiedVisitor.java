@@ -22,6 +22,12 @@ public interface TLASimplifiedVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStateElement(TLASimplifiedParser.StateElementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link TLASimplifiedParser#fState}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFState(TLASimplifiedParser.FStateContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link TLASimplifiedParser#ensuresState}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

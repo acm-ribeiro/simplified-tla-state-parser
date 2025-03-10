@@ -31,6 +31,13 @@ public class TLASimplifiedBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitFState(TLASimplifiedParser.FStateContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitEnsuresState(TLASimplifiedParser.EnsuresStateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

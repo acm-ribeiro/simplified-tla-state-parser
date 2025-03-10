@@ -7,19 +7,22 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class State {
-
     private final String original;
+
     private final List<StateElement> elements;
+
     private Map<String, Entity> entities;
 
-    public State (String original, List<StateElement> elements) {
+    public State(String original, List<StateElement> elements) {
         this.original = original;
         this.elements = elements;
 
         entities = new HashMap<>();
-        for (StateElement elem : elements)
-            if (elem.isEntity())
+        for (StateElement elem : elements) {
+            if (elem.isEntity()) {
                 entities.putAll(elem.getEntities());
+            }
+        }
     }
 
     /**
@@ -31,7 +34,6 @@ public class State {
         return original;
     }
 
-
     /**
      * Returns the state's elements.
      *
@@ -40,7 +42,6 @@ public class State {
     public List<StateElement> getElements() {
         return elements;
     }
-
 
     /**
      * Returns the schema mapping to entities.
@@ -58,25 +59,27 @@ public class State {
             s = elem.getSchemaMapping();
         }
 
-        Record r = s != null? s.getRecord() : null;
-        Map<String, RecordFieldValue> recordElems = r != null? r.getElems() : null;
+        Record r = s != null ? s.getRecord() : null;
+        Map<String, RecordFieldValue> recordElems = r != null ? r.getElems() : null;
 
-        if (recordElems != null)
-            for (Entry<String, RecordFieldValue> e : recordElems.entrySet())
+        if (recordElems != null) {
+            for (Entry<String, RecordFieldValue> e : recordElems.entrySet()) {
                 mapping.put(e.getKey(), e.getValue().toString());
+            }
+        }
 
         return mapping;
     }
 
     /**
      * Returns the number of records of the given entity.
-     * @param entityName entity name (e.g. "p" or "t")
      *
+     * @param entityName entity name (e.g. "p" or "t")
      * @return number of records of the entity.
      */
     public int getNumRecords(String entityName) {
         Entity e = entities.get(entityName);
-        return e != null? e.getNumRecords() : -1;
+        return e != null ? e.getNumRecords() : -1;
     }
 
     /**
@@ -89,9 +92,7 @@ public class State {
     }
 
     /**
-     * Returns a map of this state's entities.
-     * An entity is a set of records, e.g. p = {p1 :> [...], p2:> [...]}
-     * key: p
+     * Returns a map of this state's entities. An entity is a set of records, e.g. p = {p1 :> [...], p2:> [...]} key: p
      * value: the set of records
      *
      * @return entities map
@@ -100,12 +101,27 @@ public class State {
         return entities;
     }
 
+    /**
+     * Checks whether this state is a final state. *
+     *
+     * @return true if it is a final state; false otherwise.
+     */
+    public boolean isFinalState() {
+        boolean isFinalState = false;
+        for (StateElement e : elements) {
+            if (e.getF() != null) {
+                isFinalState = e.getF().getF();
+            }
+        }
+        return isFinalState;
+    }
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("state = {\n");
 
-        for (StateElement e : elements){
+        for (StateElement e : elements) {
             s.append("  ");
             s.append(e.toString());
             s.append("\n");
