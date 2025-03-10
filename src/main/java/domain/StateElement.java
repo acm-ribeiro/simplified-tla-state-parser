@@ -4,14 +4,12 @@ import java.util.Map;
 
 public class StateElement {
 
-    private final FState f;
     private final EnsuresState ensures;
     private final Map<String, Entity> entities;
     private final SchemaMapping schemaMapping;
 
-    public StateElement(FState fState, EnsuresState ensuresState, Map<String, Entity> entities,
+    public StateElement(EnsuresState ensuresState, Map<String, Entity> entities,
         SchemaMapping schemaMapping) {
-        f = fState;
         ensures = ensuresState;
         this.entities = entities;
         this.schemaMapping = schemaMapping;
@@ -34,10 +32,6 @@ public class StateElement {
      */
     public int getNumRecords(String entityName) {
         return entities.get(entityName).getNumRecords();
-    }
-
-    public FState getF() {
-        return f;
     }
 
     public EnsuresState getEnsures() {

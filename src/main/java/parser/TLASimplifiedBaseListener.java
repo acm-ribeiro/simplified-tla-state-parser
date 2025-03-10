@@ -5,180 +5,168 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
- * This class provides an empty implementation of {@link TLASimplifiedStateListener},
+ * This class provides an empty implementation of {@link TLASimplifiedListener},
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
 @SuppressWarnings("CheckReturnValue")
-public class TLASimplifiedStateBaseListener implements TLASimplifiedStateListener {
+public class TLASimplifiedBaseListener implements TLASimplifiedListener {
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterState(TLASimplifiedStateParser.StateContext ctx) { }
+	@Override public void enterState(TLASimplifiedParser.StateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitState(TLASimplifiedStateParser.StateContext ctx) { }
+	@Override public void exitState(TLASimplifiedParser.StateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStateElement(TLASimplifiedStateParser.StateElementContext ctx) { }
+	@Override public void enterStateElement(TLASimplifiedParser.StateElementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStateElement(TLASimplifiedStateParser.StateElementContext ctx) { }
+	@Override public void exitStateElement(TLASimplifiedParser.StateElementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFState(TLASimplifiedStateParser.FStateContext ctx) { }
+	@Override public void enterEnsuresState(TLASimplifiedParser.EnsuresStateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFState(TLASimplifiedStateParser.FStateContext ctx) { }
+	@Override public void exitEnsuresState(TLASimplifiedParser.EnsuresStateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEnsuresState(TLASimplifiedStateParser.EnsuresStateContext ctx) { }
+	@Override public void enterSchemaMapping(TLASimplifiedParser.SchemaMappingContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEnsuresState(TLASimplifiedStateParser.EnsuresStateContext ctx) { }
+	@Override public void exitSchemaMapping(TLASimplifiedParser.SchemaMappingContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSchemaMapping(TLASimplifiedStateParser.SchemaMappingContext ctx) { }
+	@Override public void enterEntity(TLASimplifiedParser.EntityContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSchemaMapping(TLASimplifiedStateParser.SchemaMappingContext ctx) { }
+	@Override public void exitEntity(TLASimplifiedParser.EntityContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEntity(TLASimplifiedStateParser.EntityContext ctx) { }
+	@Override public void enterMap(TLASimplifiedParser.MapContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEntity(TLASimplifiedStateParser.EntityContext ctx) { }
+	@Override public void exitMap(TLASimplifiedParser.MapContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMap(TLASimplifiedStateParser.MapContext ctx) { }
+	@Override public void enterMapElement(TLASimplifiedParser.MapElementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMap(TLASimplifiedStateParser.MapContext ctx) { }
+	@Override public void exitMapElement(TLASimplifiedParser.MapElementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMapElement(TLASimplifiedStateParser.MapElementContext ctx) { }
+	@Override public void enterRecord(TLASimplifiedParser.RecordContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMapElement(TLASimplifiedStateParser.MapElementContext ctx) { }
+	@Override public void exitRecord(TLASimplifiedParser.RecordContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRecord(TLASimplifiedStateParser.RecordContext ctx) { }
+	@Override public void enterRecordElement(TLASimplifiedParser.RecordElementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRecord(TLASimplifiedStateParser.RecordContext ctx) { }
+	@Override public void exitRecordElement(TLASimplifiedParser.RecordElementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRecordElement(TLASimplifiedStateParser.RecordElementContext ctx) { }
+	@Override public void enterFieldValue(TLASimplifiedParser.FieldValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRecordElement(TLASimplifiedStateParser.RecordElementContext ctx) { }
+	@Override public void exitFieldValue(TLASimplifiedParser.FieldValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFieldValue(TLASimplifiedStateParser.FieldValueContext ctx) { }
+	@Override public void enterSet(TLASimplifiedParser.SetContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFieldValue(TLASimplifiedStateParser.FieldValueContext ctx) { }
+	@Override public void exitSet(TLASimplifiedParser.SetContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSet(TLASimplifiedStateParser.SetContext ctx) { }
+	@Override public void enterSetElement(TLASimplifiedParser.SetElementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSet(TLASimplifiedStateParser.SetContext ctx) { }
+	@Override public void exitSetElement(TLASimplifiedParser.SetElementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSetElement(TLASimplifiedStateParser.SetElementContext ctx) { }
+	@Override public void enterObjectRecord(TLASimplifiedParser.ObjectRecordContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSetElement(TLASimplifiedStateParser.SetElementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterObjectRecord(TLASimplifiedStateParser.ObjectRecordContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitObjectRecord(TLASimplifiedStateParser.ObjectRecordContext ctx) { }
+	@Override public void exitObjectRecord(TLASimplifiedParser.ObjectRecordContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

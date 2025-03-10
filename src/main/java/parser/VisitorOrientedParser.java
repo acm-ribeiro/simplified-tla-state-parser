@@ -12,7 +12,6 @@ import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import domain.Entity;
-import domain.FState;
 import domain.ObjectRecord;
 import domain.EnsuresState;
 import domain.Record;
@@ -27,22 +26,22 @@ public class VisitorOrientedParser {
 
     public State parse(String s) {
         CharStream charStream = CharStreams.fromString(s);
-        TLASimplifiedStateLexer lexer = new TLASimplifiedStateLexer(charStream);
+        TLASimplifiedLexer lexer = new TLASimplifiedLexer(charStream);
         TokenStream tokens = new CommonTokenStream(lexer);
-        TLASimplifiedStateParser parser = new TLASimplifiedStateParser(tokens);
+        TLASimplifiedParser parser = new TLASimplifiedParser(tokens);
 
         TLAStateVisitor visitor = new TLAStateVisitor();
 
         return visitor.visit(parser.state());
     }
 
-    public static class TLAStateVisitor extends TLASimplifiedStateBaseVisitor<State> {
+    public static class TLAStateVisitor extends TLASimplifiedBaseVisitor<State> {
         @Override
-        public State visitState(TLASimplifiedStateParser.StateContext ctx) {
+        public State visitState(TLASimplifiedParser.StateContext ctx) {
             StateElementVisitor stateElementVisitor = new StateElementVisitor();
             List<StateElement> stateElements = new ArrayList<>();
 
-            for (TLASimplifiedStateParser.StateElementContext elemCtx : ctx.stateElement())
+            for (TLASimplifiedParser.StateElementContext elemCtx : ctx.stateElement())
                 stateElements.add(elemCtx.accept(stateElementVisitor));
 
 
@@ -50,23 +49,20 @@ public class VisitorOrientedParser {
         }
     }
 
-    public static class StateElementVisitor extends TLASimplifiedStateBaseVisitor<StateElement> {
+    public static class StateElementVisitor extends TLASimplifiedBaseVisitor<StateElement> {
         @Override
-        public StateElement visitStateElement(TLASimplifiedStateParser.StateElementContext ctx) {
-            FStateVisitor fStateVisitor = new FStateVisitor();
-            FState fState = ctx.fState() != null ? ctx.accept(fStateVisitor) : null;
-
+        public StateElement visitStateElement(TLASimplifiedParser.StateElementContext ctx) {
             EnsuresStateVisitor ensuresStateVisitor = new EnsuresStateVisitor();
             EnsuresState ensuresState = ctx.ensuresState() != null ? ctx.accept(ensuresStateVisitor) : null;
 
-            List<TLASimplifiedStateParser.EntityContext> entitiesCtx = ctx.entity() != null ? ctx.entity() : null;
+            List<TLASimplifiedParser.EntityContext> entitiesCtx = ctx.entity() != null ? ctx.entity() : null;
             Map<String, Entity> entities = null;
 
             if (entitiesCtx != null) {
                 EntityVisitor entityVisitor = new EntityVisitor();
                 entities = new HashMap<>();
 
-                for (TLASimplifiedStateParser.EntityContext entityCtx : entitiesCtx) {
+                for (TLASimplifiedParser.EntityContext entityCtx : entitiesCtx) {
                     Entity e = entityCtx.accept(entityVisitor);
                     entities.put(e.getName(), e);
                 }
@@ -75,13 +71,13 @@ public class VisitorOrientedParser {
             SchemaMappingVisitor schemaMappingVisitor = new SchemaMappingVisitor();
             SchemaMapping schemaMapping = ctx.schemaMapping() != null? ctx.accept(schemaMappingVisitor) : null;
 
-            return new StateElement(fState, ensuresState, entities, schemaMapping);
+            return new StateElement(ensuresState, entities, schemaMapping);
         }
     }
 
-    public static class SchemaMappingVisitor extends TLASimplifiedStateBaseVisitor<SchemaMapping> {
+    public static class SchemaMappingVisitor extends TLASimplifiedBaseVisitor<SchemaMapping> {
         @Override
-        public SchemaMapping visitSchemaMapping(TLASimplifiedStateParser.SchemaMappingContext ctx) {
+        public SchemaMapping visitSchemaMapping(TLASimplifiedParser.SchemaMappingContext ctx) {
             RecordVisitor recordVisitor = new RecordVisitor();
             Record record = ctx.record() != null? ctx.accept(recordVisitor) : null;
 
@@ -89,17 +85,17 @@ public class VisitorOrientedParser {
         }
     }
 
-    public static class EntityVisitor extends TLASimplifiedStateBaseVisitor<Entity> {
+    public static class EntityVisitor extends TLASimplifiedBaseVisitor<Entity> {
         @Override
-        public Entity visitEntity(TLASimplifiedStateParser.EntityContext ctx) {
+        public Entity visitEntity(TLASimplifiedParser.EntityContext ctx) {
             String name = ctx.STRING().getText();
             Map<String, Record> records = new HashMap<>();
 
-            List<TLASimplifiedStateParser.MapElementContext> elemsCtx = ctx.map().mapElement();
+            List<TLASimplifiedParser.MapElementContext> elemsCtx = ctx.map().mapElement();
             RecordVisitor recordVisitor = new RecordVisitor();
 
             String recordId;
-            for (TLASimplifiedStateParser.MapElementContext elemCtx : elemsCtx) {
+            for (TLASimplifiedParser.MapElementContext elemCtx : elemsCtx) {
                 recordId = elemCtx.STRING().getText();
                 Record r = elemCtx.record().accept(recordVisitor);
                 r.setId(recordId);
@@ -110,32 +106,24 @@ public class VisitorOrientedParser {
         }
     }
 
-    public static class FStateVisitor extends TLASimplifiedStateBaseVisitor<FState> {
+    public static class EnsuresStateVisitor extends TLASimplifiedBaseVisitor<EnsuresState> {
         @Override
-        public FState visitFState(TLASimplifiedStateParser.FStateContext ctx) {
-            boolean f = Boolean.parseBoolean(ctx.BOOLEAN().getText());
-            return new FState(f);
-        }
-    }
-
-    public static class EnsuresStateVisitor extends TLASimplifiedStateBaseVisitor<EnsuresState> {
-        @Override
-        public EnsuresState visitEnsuresState(TLASimplifiedStateParser.EnsuresStateContext ctx) {
+        public EnsuresState visitEnsuresState(TLASimplifiedParser.EnsuresStateContext ctx) {
             boolean ensures = Boolean.parseBoolean(ctx.BOOLEAN().getText());
             return new EnsuresState(ensures);
         }
     }
 
-    public static class ObjectRecordVisitor extends TLASimplifiedStateBaseVisitor<ObjectRecord> {
+    public static class ObjectRecordVisitor extends TLASimplifiedBaseVisitor<ObjectRecord> {
         @Override
-        public ObjectRecord visitObjectRecord(TLASimplifiedStateParser.ObjectRecordContext ctx) {
+        public ObjectRecord visitObjectRecord(TLASimplifiedParser.ObjectRecordContext ctx) {
             List<Record> records = new ArrayList<>();
             List<String> strRecords = new ArrayList<>();
 
-            for (TLASimplifiedStateParser.RecordContext r : ctx.record()) {
+            for (TLASimplifiedParser.RecordContext r : ctx.record()) {
                 Map<String, RecordFieldValue> elems = new HashMap<>();
 
-                for (TLASimplifiedStateParser.RecordElementContext e : r.recordElement()) {
+                for (TLASimplifiedParser.RecordElementContext e : r.recordElement()) {
                     String name = e.STRING().getText();
 
                     RecordFieldValueVisitor recordFieldValueVisitor = new RecordFieldValueVisitor();
@@ -152,9 +140,9 @@ public class VisitorOrientedParser {
         }
     }
 
-    public static class RecordFieldValueVisitor extends TLASimplifiedStateBaseVisitor<RecordFieldValue> {
+    public static class RecordFieldValueVisitor extends TLASimplifiedBaseVisitor<RecordFieldValue> {
         @Override
-        public RecordFieldValue visitFieldValue(TLASimplifiedStateParser.FieldValueContext ctx) {
+        public RecordFieldValue visitFieldValue(TLASimplifiedParser.FieldValueContext ctx) {
             String str = ctx.STRING() != null ? ctx.STRING().getText() : null;
             Integer num = ctx.NAT() != null ? Integer.parseInt(ctx.NAT().getText()) : null;
             Boolean bool = ctx.BOOLEAN() != null ? Boolean.parseBoolean(ctx.BOOLEAN().getText()) : null;
@@ -166,22 +154,22 @@ public class VisitorOrientedParser {
         }
     }
 
-    public static class SetVisitor extends TLASimplifiedStateBaseVisitor<Set> {
+    public static class SetVisitor extends TLASimplifiedBaseVisitor<Set> {
         @Override
-        public Set visitSet(TLASimplifiedStateParser.SetContext ctx) {
+        public Set visitSet(TLASimplifiedParser.SetContext ctx) {
             List<SetElement> setElements = new ArrayList<>();
             SetElementVisitor setElementVisitor = new SetElementVisitor();
 
-            for (TLASimplifiedStateParser.SetElementContext e : ctx.setElement())
+            for (TLASimplifiedParser.SetElementContext e : ctx.setElement())
                 setElements.add(e.accept(setElementVisitor));
 
             return new Set(setElements);
         }
     }
 
-    public static class SetElementVisitor extends TLASimplifiedStateBaseVisitor<SetElement> {
+    public static class SetElementVisitor extends TLASimplifiedBaseVisitor<SetElement> {
         @Override
-        public SetElement visitSetElement(TLASimplifiedStateParser.SetElementContext ctx) {
+        public SetElement visitSetElement(TLASimplifiedParser.SetElementContext ctx) {
             List<String> strElems = new ArrayList<>();
             List<Integer> intElems = new ArrayList<>();
             List<Record> recordElems = new ArrayList<>();
@@ -197,7 +185,7 @@ public class VisitorOrientedParser {
             if (ctx.record() != null) {
                 RecordVisitor recordVisitor = new RecordVisitor();
 
-                for (TLASimplifiedStateParser.RecordContext r : ctx.record())
+                for (TLASimplifiedParser.RecordContext r : ctx.record())
                     recordElems.add(r.accept(recordVisitor));
             }
 
@@ -205,15 +193,15 @@ public class VisitorOrientedParser {
         }
     }
 
-    public static class RecordVisitor extends TLASimplifiedStateBaseVisitor<Record> {
+    public static class RecordVisitor extends TLASimplifiedBaseVisitor<Record> {
         @Override
-        public Record visitRecord(TLASimplifiedStateParser.RecordContext ctx) {
+        public Record visitRecord(TLASimplifiedParser.RecordContext ctx) {
             RecordFieldValueVisitor fieldValueVisitor = new RecordFieldValueVisitor();
             Map<String, RecordFieldValue> elems = new HashMap<>();
 
             String name;
             RecordFieldValue value;
-            for (TLASimplifiedStateParser.RecordElementContext e : ctx.recordElement()) {
+            for (TLASimplifiedParser.RecordElementContext e : ctx.recordElement()) {
                 name = e.STRING().getText();
                 value = e.fieldValue().accept(fieldValueVisitor);
                 elems.put(name, value);
